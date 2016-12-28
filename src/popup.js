@@ -1,13 +1,13 @@
-var converter = new showdown.Converter({tabls: true});
+var converter = new showdown.Converter({tables: true});
 // Update the relevant fields with the new data
 function parseDOMspans(info) {
   var validatedSpans = info.spans;
-  $.each(validatedSpans, function(i, val){
-    console.log(val);
-      let nodeText = val;
-      $('.rendered-markdown').append(converter.makeHtml(nodeText));
-  });
+  var longStr = validatedSpans.join('');
+  var replaced = longStr.replace(/\&nbsp\;/g, '\n');
+  $('.rendered-markdown').append(converter.makeHtml(replaced));
+
 }
+
 
 // Once the DOM is ready...
 window.addEventListener('DOMContentLoaded', function () {

@@ -16,8 +16,15 @@ chrome.runtime.onMessage.addListener(function (msg, sender, response) {
     var spanArr = [];
     spanList.forEach(function(foundSpan, i){
       if (foundSpan.childNodes.length > 0 && foundSpan.childNodes[0].childNodes.length ==0 && foundSpan.childNodes[0].data  != undefined){
-          if(foundSpan.innerHTML !== "&nbsp;"){
-            spanArr.push(foundSpan.innerText);
+          if(foundSpan.innerHTML == "&nbsp;"){
+            spanArr.push('&nbsp;');
+          } else {
+            if(foundSpan.innerText.substr(foundSpan.innerText.length - 1) == ' '){
+              spanArr.push(foundSpan.innerText.slice(0, -1));
+            } else {
+              spanArr.push(foundSpan.innerText);
+            }
+
           }
       }
     });
